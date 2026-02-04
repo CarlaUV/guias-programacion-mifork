@@ -1,48 +1,45 @@
-<!--
-Posible prompt:
-<prompt>
-Tengo un cuestionario con preguntas sobre "Clases y Objetos". Debes tener en cuenta que los conocimientos previos que tengo (y por tanto tus respuestas deben ser adaptadas), son:
-- C/C++ sin orientación a objetos.
-- Temas de Java previos: ninguno.
-
-Cada respuesta debe tener entre 2 - 4 párrafos de longitud (sin contar los trozos de código).
-
-Por favor, escribe en impersonal las respuestas.
-
-</prompt>
-----
--->
-
 # TEMA 1. Clases y objetos
 
 ## 1. ¿Cuáles son las cuatro características básicas de la programación orientada a objetos? Describe brevemente cada una
 
 ### Respuesta
-- Abstracción: El proceso de abstracción permite seleccionar las características relevantes dentro de un conjunto e identificar comportamientos comunes para definir nuevos tipos de entidades en el mundo real.
-- Encapsulamiento: Significa reunir todos los elementos que pueden considerarse pertenecientes a una misma entidad, al mismo nivel de abstracción.
+- Abstracción:
+Es un mecanismo que permite tratar temas complejos para facilitar el cambio.
+El proceso de abstracción permite seleccionar las características relevantes dentro de un conjunto e identificar comportamientos comunes para definir nuevos tipos de entidades en el mundo real.
+- Encapsulamiento:
+Permite unir estado y comportamiento en una misma unidad y poder ocultar las partes de la misma.
+Significa reunir todos los elementos que pueden considerarse pertenecientes a una misma entidad, al mismo nivel de abstracción.
 - Polimorfismo: Comportamientos diferentes, asociados a objetos distintos, pueden compartir el mismo nombre; al llamarlos por ese nombre se utilizará el comportamiento correspondiente al objeto que se esté usando.
-- Herencia: Las clases no se encuentran aisladas, sino que se relacionan entre sí, formando una jerarquía de clasificación. Los objetos heredan las propiedades y el comportamiento de todas las clases a las que pertenecen.
+- Herencia:
+Permite establecer jerarquías.
+Las clases no se encuentran aisladas, sino que se relacionan entre sí, formando una jerarquía de clasificación. Los objetos heredan las propiedades y el comportamiento de todas las clases a las que pertenecen.
+
+- Composición: 
 
 ## 2. Cita cuatro lenguajes populares que permitan la programación orientada a objetos
 
 ### Respuesta
-Java Script, Python, C#, R, etc.
+JavaScript, Python --> Dinámicos
+C#, Java (con GC y con máquina virtual) / R, C++ (sin GC) --> Compilados
 
 ## 3. Los paradigmas anteriores a la POO, ¿Qué es la **programación estructurada**? y, todavía mejor, ¿Qué es la **programación modular**?
 
 ### Respuesta
+Antes de la programación estructurada estaba la programación en ensamblador (secuencia, salto arbitrario (GOTO)).
 La programación estructurada es un paradigma de programación orientado a mejorar la claridad, calidad y tiempo de desarrollo de un programa de computadora recurriendo únicamente a subrutinas y a tres estructuras de control básicas: secuencia, selección (if y switch) e iteración (bucles for y while). 
 La programación modular es un paradigma de programación que consiste en dividir un programa en módulos o subprogramas con el fin de hacerlo más legible y manejable.
 
 ## 4. ¿Qué tres elementos definen a un objeto en programación orientada a objetos?
 
 ### Respuesta
-Los tres elementos que definen a un objeto son: la identidad, el comportamiento y el estado
+Los tres elementos que definen a un objeto son: la identidad (dirección de memoria), el comportamiento (métodos, las funciones que todos los objetos de esa clase pueden hacer) y el estado (atributo, en structs eran campos).
 
 ## 5. ¿Qué es una clase? ¿Es lo mismo que un objeto? ¿Qué es una instancia? ¿Todos los lenguajes orientados a objetos manejan el concepto de clase?
 
 ### Respuesta
+Clase --> Molde para crear instancias durante la ejecución. Define la estructura del estado.
 Una clase es una especie de "plantilla" en la que se definen los atributos y métodos predeterminados de un tipo de objeto. Esta plantilla se crea para poder crear objetos fácilmente. No es lo mismo que un objeto.
+Objeto --> Variables de tipo 'alguna clase' con un estado concreto de sus atributos.
 Una instancia es un bloque de memoria, que contiene la referencia a un objeto. En otras palabras, la instancia mantendrá la dirección del bloque de memoria de inicio donde se almacena el objeto.
 Si, todos los lenguajes orientados a objetos manejan el concepto de clase.
 
@@ -62,16 +59,28 @@ La sobrecarga es un concepto que permite a los desarrolladores definir múltiple
 ## 8. Ejemplo mínimo de clase en Java, que se llame Punto, con dos atributos, x e y, con un método que se llame `calculaDistanciaAOrigen`, que calcule la distancia a la posición 0,0. Por sencillez, los atributos deben tener visibilidad por defecto. Crea además un ejemplo de uso con una instancia y uso del método
 
 ### Respuesta
-public static void main() {
-    var punto = 0.0;
-    double x = 2.5;
-    double y = 5.7;
-    punto = calculaDistanciaAOrigen(x,y);
-}
-public static void calculaDistanciaAOrigen(double x, double y) {
-    return abs(x-y);
+```c
+struct Punto {
+    int x;
+    int y;
 }
 
+double calcularDistanciaAOrigen(Punto p) {
+    return sqrt((p.x*p.x) + (p.y*p.y));
+}
+```
+```java
+class Punto {
+    double x = 2.5;
+    double y = 5.7;
+    public static void main() {
+        var distancia = calculaDistanciaAOrigen();
+    }
+    public double calculaDistanciaAOrigen() {
+        return Math.sqrt((x*x) + (y*y));
+    }
+}
+```
 ## 9. ¿Cuál es el punto de entrada en un programa en Java? ¿Qué es `static` y para qué vale? ¿Sólo se emplea para ese método `main`? ¿Para qué se combina con `final`?
 
 ### Respuesta
@@ -100,41 +109,45 @@ var empleado = new Empleado("*nombre*", "*apellidos*", "*DNI*");
 ### Respuesta
 `this` es una palabra reservada que hace referencia al objeto actual de un método o contructor dentro de una clase.
 No se llama igual en todos los lenguajes.
+
+```java
 class Punto {
-    this.x = 2.5;
-    this.y = 5.7
+    double x = 2.5;
+    double y = 5.7;
     public static void main() {
-        var punto = 0.0;
-        this.x = 2.5;
-        this.y = 5.7;
-        punto = calculaDistanciaAOrigen(this.x,this.y);
+        var distancia = calculaDistanciaAOrigen();
     }
-    public static void calculaDistanciaAOrigen(double x, double y) {
-        return abs(x-y);
+    public double calculaDistanciaAOrigen() {
+        return Math.sqrt((this.x*this.x) + (this.y*this.y));
     }
 }
+```
 
 ## 13. Añade ahora otro nuevo método que se llame `distanciaA`, que reciba un `Punto` como parámetro y calcule la distancia entre `this` y el punto proporcionado
 
 ### Respuesta
+```java
 class Punto {
-    this.x = 2.5;
-    this.y = 5.7;
-    this.punto = 0.0;
+    double x;
+    double y;
     public static void main() {
-        this.punto = 0.0;
-        this.x = 2.5;
-        this.y = 5.7;
-        this.punto = calculaDistanciaAOrigen(this.x,this.y);
-        system.out.println(distanciaA(8.8));
+        var distancia = calculaDistanciaAOrigen();
+        Punto punto1 = new Punto(4.3,8.9);
+        Punto punto2 = new Punto(2.4,6.1);
+        punto1.distanciaA(punto2);
     }
-    public static void calculaDistanciaAOrigen(double x, double y) {
-        return abs(x-y);
+    public Punto(double x, double y) {
+        this.x = x;
+        this.y = y;
     }
-    public static void distanciaA(double punto) {
-        return abs(this.punto-punto);
+    public double calculaDistanciaAOrigen() {
+        return Math.sqrt((this.x*this.x) + (this.y*this.y));
+    }
+    public double distanciaA(Punto punto) {
+        return Math.sqrt((Math.abs(this.x-punto.x)*Math.abs(this.x-punto.x))+(Math.abs(this.y-punto.y)*Math.abs(this.y-punto.y)));
     }
 }
+```
 
 ## 14. El paso del `Punto` como parámetro a un método, es **por copia** o **por referencia**, es decir, si se cambia el valor de algún atributo del punto pasado como parámetro, dichos cambios afectan al objeto fuera del método? ¿Qué ocurre si en vez de un `Punto`, se recibiese un entero (`int`) y dicho entero se modificase dentro de la función? 
 
@@ -158,3 +171,24 @@ Le hace falta abstracción, polimorfismo encapsulamiento y herencia.
 ## 17. Quitemos un poco de magia a todo esto: ¿Como se podría “emular”, con `struct` en C, la clase `Punto`, con su función para calcular la distancia al origen? ¿Qué ha pasado con `this`?
 
 ### Respuesta
+```c
+#include <math.h>
+#include <io.h>
+typedef struct Punto {
+    double x;
+    double y;
+} Punto;
+
+void main() {
+    Punto punto1 = {2.5, 5.7};
+    Punto punto2 = {6.5, 3.7};
+    double distancia = calculaDistanciaAOrigen(punto1);
+    printf("%d\n", distanciaA(punto1, punto2));
+}
+double calculaDistanciaAOrigen(Punto punto) {
+    return sqrtd((punto.x*punto.x) + (punto.y*punto.y));
+}
+double distanciaA(Punto punto1, Punto punto2) {
+    return sqrtd((absd(punto1.x-punto2.x)*absd(punto1.x-punto2.x))+(absd(punto1.y-punto2.y)*absd(punto1.y-punto2.y)));
+}
+```
