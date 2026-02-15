@@ -46,8 +46,13 @@ Si, todos los lenguajes orientados a objetos manejan el concepto de clase.
 ## 6. ¿Dónde se almacenan en memoria los objetos? ¿Es igual en todos los lenguajes? ¿Qué es la **recolección de basura**? 
 
 ### Respuesta
-Los objetos de guardan en la memria de montículo(heap). La memoria de montículo es una parte de la memoría de java.
-No, dependiendo del lenguaje de programción es diferente. Por ejemplo en c++ los objetos se pueden guardar o en el montículo(heap) o en stack.
+Los objetos de guardan en la memoria heap. La memoria heap es una parte de la memoria de java.
+No, dependiendo del lenguaje de programción es diferente. Por ejemplo en c++ los objetos se pueden guardar o en el heap o en stack.
+Ventajas heap: 
+    - Reserva dinámicamente de memoria, el tamaño se decide en ejecución.
+    - Lo que esta en el Heap vive más allá que en el método o función que se ha creado.
+Desventajas:
+    - Hay que liberarla cuando no se necesita, bien de forma manual o automática(recoelctor de basura). 
 La recolección de basura es un proceso que permite liberar memoria ocupada por objetos que ya no son necesarios en un programa. Esto ayuda a prevenir fugas de memoria y mejora el rendimiento del sistema.
 
 ## 7. ¿Qué es un método? ¿Qué es la **sobrecarga de métodos**? 
