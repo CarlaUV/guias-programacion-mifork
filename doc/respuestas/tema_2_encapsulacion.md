@@ -223,19 +223,43 @@ La clase String es inmutable.
 
 ## 20. En POO ¿Cómo se comparan objetos de una misma clase? ¿Por su contenido o por su identidad? ¿Qué es el método equals en Java? ¿Qué hace por defecto? ¿Cómo se deben comparar dos cadenas en Java?
 ### Respuesta
-
+Se pueden comparan con métodos de clase o con operadores de comparación. Depende del método se compara su contenido o identidad.
+El método equals se utiliza para comparar si dos objetos son iguales. Por defecto hace comparación por identidad(==), excepto en clases concretas donde se implementa una comparación por contenido, p.ej en String.
+Se debe comparar por equals ya que quieres comparar los contenidos por String, y este método asegura ese proceso.
 
 ## 21. ¿Qué son las clases "wrapper" en un lenguaje de programación orientado a objetos? ¿Cómo se hace? ¿Es un proceso automático? ¿Qué ventajas tienen? ¿Todos los lenguajes orientados a objetos tienen tipos primitivos y necesitan wrappers? 
 ### Respuesta
-
+Wrapper:
+    - Ocurren en lenguajes que tiene tipos primitivo, p.ej Java.
+    - Otros lenguajes no tienen tipos primitivos, como Python.
+    |_  
+      |  int <=> Integer
+      |  float <=> Float
+      |  char <=> Character
+    Ventajas:
+        - Añadirle comportamiento
+        - Poder usarlos en contextos donde se necesitan objetos. List<T>
+    Autoboxing/Unboxing
 
 ## 22. ¿En POO qué es un **tipo de dato enumerado**? ¿En Java, un tipo de dato enumerado es una clase? ¿Qué ventajas tienen en términos de encapsulación los enumerados en Java?
 ### Respuesta
-
+- Enumerado es un tipo con un número determinado de valores posibles.
+- En Java en enumerado es una clase, cuyas instancias son finitas, conocidas de antemano y tiene un nombre cada una (valor del enum)
 
 ## 23. Crea un tipo enumerado en Java que se llame `Mes`, con doce posibles instancias y que además proporcione métodos para obtener cuántos días tiene ese mes, el ordinal de ese mes en el año (1-12), empleando atributos privados y constructores del tipo enumerado.
 ### Respuesta
-
+``` Java
+public enum TipoIVA {
+    GENRAL,REDUCIDO;
+    private double factor;
+    public double aplicar(double cant) {
+        return cant * this.factor;
+    }
+    private TipoIVA(double factor) {
+        this.factor = factor;
+    }
+}
+```
 
 ## 24. Añade a la clase `Mes` del ejercicio anterior cuatro métodos para devolver si ese mes tiene algunos días de invierno, primavera, verano u otoño, indicando con un booleano el hemisferio (norte o sur, parámetro `enHemisferioNorte`). Es decir: `esDePrimavera(boolean esHemisferioNorte)`, `esDeVerano(boolean esHemisferioNorte)`, `esDeOtoño(boolean esHemisferioNorte)`, `esDeInvierno(boolean esHemisferioNorte)`
 ### Respuesta
