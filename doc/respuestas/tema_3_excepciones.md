@@ -143,7 +143,6 @@ Si, puede ir sin catch
 ## 12. ¿Qué es y para qué se usa `throws`? ¿Por qué es alternativa a capturar una excepción controlada?
 ### Respuesta
 ### Cuando tenemos una excepción controlada tenemos dos opciones, manejar la excepción con un try catch o desentendernos del error con el throw mandándolo a quién llame la función (el llamador). Si manejamos la excepción y la función devuelve un valor (por ejemplo, un string en una función para leer un archivo) debemos usar el finally.
-
 ### throws en la firma declara que un método puede lanzar ciertas checked exceptions. 
 ### Sirve para delegar la gestión al llamador, que decidirá capturar o volver a declarar. Es una alternativa a capturar localmente y forma parte del contrato del método.
 
