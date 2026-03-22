@@ -13,8 +13,7 @@ Significa reunir todos los elementos que pueden considerarse pertenecientes a un
 - Herencia:
 Permite establecer jerarquías.
 Las clases no se encuentran aisladas, sino que se relacionan entre sí, formando una jerarquía de clasificación. Los objetos heredan las propiedades y el comportamiento de todas las clases a las que pertenecen.
-
-- Composición: 
+- Composición: Permite reutilizar código usando instancias de clases en vez de herencia. 
 
 ## 2. Cita cuatro lenguajes populares que permitan la programación orientada a objetos
 
