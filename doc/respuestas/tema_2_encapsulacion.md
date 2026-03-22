@@ -94,9 +94,9 @@ Miembro de instacia -> Está asociado a cada instancia; no son compartidos.
 ## 12. Brevemente: ¿Tiene sentido que los constructores sean privados?
 ### Respuesta
 Si, a veces, por ejemplo:
-    - Un constructor auxiliar oculto
-    - Cuando prefiero usar métodos factoria
-    - Cuando quiero controlar el núnero de instancias
+- Un constructor auxiliar oculto
+- Cuando prefiero usar métodos factoria
+- Cuando quiero controlar el número de instancias
 
 ## 13. ¿Cómo se indican los **miembros de clase** en Java? Pon un ejemplo, en la clase `Punto` definida anteriormente, para que incluya miembros de clase que permitan saber cuáles son los valores `x` e `y` máximos que se han establecido en todos los puntos que se hayan creado hasta el momento.
 ### Respuesta
@@ -149,7 +149,51 @@ class Punto {
 
 ## 14. Como sería un método factoría dentro de la clase `Punto` para construir un `Punto` a partir de dos coordenadas, pero que las redondee al entero más cercano. Escribe sólo el código del método, no toda la clase ¿Has usado `static`? 
 ### Respuesta
+```Java
+class Punto {
+    private double x;
+    private double y;
 
+    public Punto(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public static Punto nuevoEn(double x, double y) {
+        return new Punto(x,y)
+    }
+
+    public static Punto puntoRedondeado(double x, double y) {
+        return new Punto(Math.round(x), Math.round(y));
+    }
+
+    public double calcularDistanciaAOrigen() {
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+    }
+
+    public double calcularDistanciaAOtroPunto(Punto otro) {
+        double dx = this.x - otro.x;
+        double dy = this.y - otro.y;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    public double getX() {
+        return this.x;
+    }
+
+    public void setX(x) {
+        this.x = x;
+    }
+
+    public double getY() {
+        return this.y;
+    }
+
+    public void setY(y) {
+        this.y = y;
+    }
+}
+```
 
 ## 15. Cambia la implementación de `Punto`. En vez de dos `double`, emplea un array interno de dos posiciones, intentando no modificar la interfaz pública de la clase.
 ### Respuesta
@@ -204,14 +248,16 @@ class Punto {
 ### Respuesta
 Si los hago públicos
     - para poder garantiza la invariantes de clase
-    - Para poder cmabiar la representación interna
+    - Para poder cambiar la representación interna
     - Convención es:
-        - Atributos siempre priovados y emplear métodos de acceso.
+        - Atributos siempre privados y emplear métodos de acceso.
+
 
 ## 17. ¿Qué significa que una clase sea **inmutable**? ¿qué es un método modificador? ¿Un método modificador es siempre un "setter"? ¿Tiene ventajas que una clase sea inmutable?
 ### Respuesta
-Inmontable -> su estado no cambia
-modificador -> cualquier método que cambia el estado interno, por ejemplo: un setter.
+Inmutable -> su estado no cambia
+Modificador -> cualquier método que cambia el estado interno, por ejemplo: un setter.
+No es siempre un setter, pero un setter es siempre un modificador.
 Dos clases inmutables tienen ventajas -> no hacer clases mutables por defecto
 
 ## 18. ¿Es recomendable incluir métodos "setter" siempre y como convención?
@@ -220,18 +266,21 @@ No.
 
 ## 19. ¿La clase `String` en Java es mutable o inmutable? ¿Qué ocurre al concatenar dos cadenas? ¿Qué debemos hacer si vamos a hacer una operación que implique concatenar muchas veces para construir paso a paso una cadena muy larga?
 ### Respuesta
-La clase String es inmutable. 
+La clase String es inmutable.
+Al concatenar dos cadenas, no se modifica ninguna de las cadenas originales, sino que se crea un objeto String totalmente nuevo en memoria que contiene el resultado.
+
+Si se requiere realizar muchas concatenaciones en un bucle, este comportamiento es muy ineficiente. En esos casos, se debe emplear la clase StringBuilder, que sí es mutable y permite construir cadenas paso a paso de forma mucho más rápida y con menor consumo de memoria.
 
 ## 20. En POO ¿Cómo se comparan objetos de una misma clase? ¿Por su contenido o por su identidad? ¿Qué es el método equals en Java? ¿Qué hace por defecto? ¿Cómo se deben comparar dos cadenas en Java?
 ### Respuesta
 Se pueden comparan con métodos de clase o con operadores de comparación. Depende del método se compara su contenido o identidad.
 El método equals se utiliza para comparar si dos objetos son iguales. Por defecto hace comparación por identidad(==), excepto en clases concretas donde se implementa una comparación por contenido, p.ej en String.
-Se debe comparar por equals ya que quieres comparar los contenidos por String, y este método asegura ese proceso.
+Para dos cadenas se debe comparar por equals ya que quieres comparar los contenidos por String, y este método asegura ese proceso.
 
 ## 21. ¿Qué son las clases "wrapper" en un lenguaje de programación orientado a objetos? ¿Cómo se hace? ¿Es un proceso automático? ¿Qué ventajas tienen? ¿Todos los lenguajes orientados a objetos tienen tipos primitivos y necesitan wrappers? 
 ### Respuesta
-Wrapper:
-    - Ocurren en lenguajes que tiene tipos primitivo, p.ej Java.
+Wrapper son clases que representan tipos primitivos como si fueran objetos (ej. Integer para int, Double para double):
+    - Ocurren en lenguajes que tienen tipos primitivo, p.ej Java.
     - Otros lenguajes no tienen tipos primitivos, como Python.
     |_  
       |  int <=> Integer
@@ -240,12 +289,12 @@ Wrapper:
     Ventajas:
         - Añadirle comportamiento
         - Poder usarlos en contextos donde se necesitan objetos. List<T>
-    Autoboxing/Unboxing
+    En Java el proceso es automático mediante Autoboxing/Unboxing
 
 ## 22. ¿En POO qué es un **tipo de dato enumerado**? ¿En Java, un tipo de dato enumerado es una clase? ¿Qué ventajas tienen en términos de encapsulación los enumerados en Java?
 ### Respuesta
 - Enumerado es un tipo con un número determinado de valores posibles.
-- En Java en enumerado es una clase, cuyas instancias son finitas, conocidas de antemano y tiene un nombre cada una (valor del enum)
+- En Java un enumerado es una clase, cuyas instancias son finitas, conocidas de antemano y tiene un nombre cada una (valor del enum)
 
 ## 23. Crea un tipo enumerado en Java que se llame `Mes`, con doce posibles instancias y que además proporcione métodos para obtener cuántos días tiene ese mes, el ordinal de ese mes en el año (1-12), empleando atributos privados y constructores del tipo enumerado.
 ### Respuesta
@@ -264,3 +313,51 @@ public enum TipoIVA {
 
 ## 24. Añade a la clase `Mes` del ejercicio anterior cuatro métodos para devolver si ese mes tiene algunos días de invierno, primavera, verano u otoño, indicando con un booleano el hemisferio (norte o sur, parámetro `enHemisferioNorte`). Es decir: `esDePrimavera(boolean esHemisferioNorte)`, `esDeVerano(boolean esHemisferioNorte)`, `esDeOtoño(boolean esHemisferioNorte)`, `esDeInvierno(boolean esHemisferioNorte)`
 ### Respuesta
+``` Java
+public enum Mes {
+    ENERO(1, 31), FEBRERO(2, 28), MARZO(3, 31), ABRIL(4, 30),
+    MAYO(5, 31), JUNIO(6, 30), JULIO(7, 31), AGOSTO(8, 31),
+    SEPTIEMBRE(9, 30), OCTUBRE(10, 31), NOVIEMBRE(11, 30), DICIEMBRE(12, 31);
+
+    private final int ordinal;
+    private final int numDias;
+
+    Mes(int ordinal, int numDias) {
+        this.ordinal = ordinal;
+        this.numDias = numDias;
+    }
+
+    public int getNumDias() { return numDias; }
+    public int getOrdinal() { return ordinal; }
+
+    // --- Métodos de estaciones ---
+
+    public boolean esDeInvierno(boolean enHemisferioNorte) {
+        if (enHemisferioNorte) {
+            return this == DICIEMBRE || this == ENERO || this == FEBRERO;
+        }
+        return this == JUNIO || this == JULIO || this == AGOSTO;
+    }
+
+    public boolean esDePrimavera(boolean enHemisferioNorte) {
+        if (enHemisferioNorte) {
+            return this == MARZO || this == ABRIL || this == MAYO;
+        }
+        return this == SEPTIEMBRE || this == OCTUBRE || this == NOVIEMBRE;
+    }
+
+    public boolean esDeVerano(boolean enHemisferioNorte) {
+        if (enHemisferioNorte) {
+            return this == JUNIO || this == JULIO || this == AGOSTO;
+        }
+        return this == DICIEMBRE || this == ENERO || this == FEBRERO;
+    }
+
+    public boolean esDeOtono(boolean enHemisferioNorte) {
+        if (enHemisferioNorte) {
+            return this == SEPTIEMBRE || this == OCTUBRE || this == NOVIEMBRE;
+        }
+        return this == MARZO || this == ABRIL || this == MAYO;
+    }
+}
+```
