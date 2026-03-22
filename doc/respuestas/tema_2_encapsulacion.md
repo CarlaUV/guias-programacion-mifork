@@ -2,9 +2,11 @@
 
 ## 1. En Programación Orientada a Objetos (POO), ¿Qué buscan la **encapsulación** y **la ocultación** de información? Enumera brevemente algunas ventajas de la ocultación de información.
 ### Respuesta
+La abstracción oculta los detalles de implementación y muestra solo la funcionalidad al usuario.
 La encapsulación, tiene que ver con protección; he juntado estado y comportamiento en un artefacto(la clase) y ahora puedo ocultar ciertas partes del exterior.
     - Evito estados no válidos de mis objetos
     - Evito dependencias desde fuera que no quiero
+La ocultación de datos es el proceso que garantiza el acceso exclusivo a los datos a los miembros de la clase y brinda integridad a los objetos al evitar cambios intencionales o no intencionados.
 
 ## 2. ¿Qué se entiende por la **interfaz pública** de un objeto o clase en POO? Describe brevemente cómo se relaciona con la ocultación de información.
 ### Respuesta
@@ -40,7 +42,6 @@ class Punto {
 
 ## 6. En Java, ¿A quiénes se pueden aplicar los modificadores `public` o `private`?
 ### Respuesta
-
 En Java 
     - Public: clases, atributos y métodos
     - Private: clases internas(no las estamos viendo), atributos y métodos
