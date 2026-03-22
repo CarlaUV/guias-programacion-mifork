@@ -93,31 +93,63 @@ class App() {
 
 ## 8. En Java, sobre el bloque **"try-catch"**, ¿se pueden tener más de un bloque `catch`? ¿cuántos bloques `catch` se ejecutan?
 ### Respuesta
-
+Sí, se puede tener más de uno
+    - Sólo se ejecuta uno
+    - Se va comprobando por orden hasta el primero que encaje
+    - Se deben poner del más especifico al más general, porque si no, los catch para excepciones específicas no se ejecutarán
 
 ## 9. Si las excepciones producen rupturas en el código llamador, ¿cómo podemos garantizar que se ejecuta siempre finalmente un código necesario para cierre de ficheros, liberacion de recursos, antes de que continúe propagándose la excepción? Pon un ejemplo en Java con `finally`, tanto con `catch` como sin él.
 ### Respuesta
-
+El finally se EJECUTA SIEMPRE que la CPU entre en el bloque try. 
+``` Java
+try {
+    ...
+    return 7;
+} catch(..) {
+    ...
+} catch(..) {
+    ...
+} finally {
+    ...
+}
+```
 
 ## 10. En Java, el bloque `finally` puede ir sin `catch`? ¿Se ejecuta siempre tanto si ocurre como si no ocurre una excepción? ¿Y si hay un `return` en medio del `try`?
 ### Respuesta
-
+Si, puede ir sin catch
+    - Se ejecuta, puesto que es finally
+    - Si hubo excepción, como no tenemos catch, se propaga.
 
 ## 11. En Java, qué son las excepciones **"controladas"** y las **"no controladas"**? ¿Qué papel juega `RuntimeException`? Pon un ejemplo de excepciones típicas controladas y no controladas que incluso nosotros mismos podríamos usar. Haz dos listas con 3 o 4 ejemplos de situación donde se suele preferir una excepción controlada y donde se suele preferir una excepción no controlada.
 ### Respuesta
-
-
+                             | IlegalArgumentException--|
+                             |                          |
+      No contorladas         | NullPointerException-----|------ RunTimeException |
+  No obliga a try/catch      |                          |                        |
+                             | ArrayOutOfBoundsException|                        |
+                                                                                 |
+                             |                                                   |
+       Controladas           | AccessDeniedException------------IOException------|------- Exception
+  Obliga a hacer try/catch   | 
 ## 12. ¿Qué es y para qué se usa `throws`? ¿Por qué es alternativa a capturar una excepción controlada?
 ### Respuesta
 
 
 ## 13. Pon un ejemplo en Java de firma de método que incluya `throws`, de una función que abre un fichero pero que declara que no le interesa menejar la excepción de si el fichero no existe, sino que se propague hacia arriba. Eso sí, acuérdate del `finally`.
 ### Respuesta
-
+``` Java
+public String leerFichero(Path p) throws IOException {
+    try {
+        ... = Files.readAllBytes(p);
+    } finally {
+        ..
+    }
+}
+```
 
 ## 14. ¿Podemos poner en `throws` excepciones no controladas, como `RuntimeException`? ¿Debería el método llamador entonces poner `try-catch` en ese caso? ¿Qué sentido tendría?
 ### Respuesta
-
+Por poder podemos, pero el compilador NO nos va a obligar a utilizar el bloque try/catch, aunque no es habitual (a veces te lo pone por documentacion)
 
 ## 15. ¿Cuándo se recomienda usar excepciones controladas, como `IOException`, y cuándo no controladas como `IllegalArgumentException`? ¿Existen en todos los lenguajes ambas opciones? En los que sólo existe una opción, ¿cuál es la más habitual?
 ### Respuesta
@@ -125,7 +157,42 @@ class App() {
 
 ## 16. ¿Tiene sentido lanzar excepciones dentro del `catch`? ¿Se puede relanzar la misma excepción capturada? ¿Cuándo tendría sentido hacer esto último? Pon ejemplos de ambos casos.
 ### Respuesta
+Si, tiene sentido, puedo relanzar la misma excepción(mediante la referencia al crear la excepcion)
+``` Java
+    try {
 
+    } catch(NumberforThatException e) {
+        throw e; // modifica el stacktrace
+    }
+```
+Envuelve en otra excepción nueva(será causa; ver 17)
+``` Java
+    try {
 
+    } catch(IOException e) {
+        throw new RunTimeException("excepción de E/S", e);
+    }
+```
+Lanza otra excepción totalmente nueva
+``` Java
+    try {
+
+    } catch(IOException e) {
+        throw new AplicationException("error");
+    }
+```
 ## 17. ¿En qué consiste que una excepción sea la **"causa"** de otra excepción? Pon un ejemplo en Java, donde capturemos una excepción de bajo nivel y la encapsulemos en otra personalizada de alto nivel. Cuando una excepción sale por pantalla y tiene una causa, ¿se ve?
 ### Respuesta
+``` Java
+    try {
+
+    } catch(IOException e) {
+        throw new NetfluxException("error E/S", e);
+    }
+```
+Causa de excepción:
+    - Se ve cuando la excepción se muestra por pantalla
+            "Excepción externa" (NotFluxException)
+            ------------------
+            ------------------
+            Cause by "Excepción interna" (IOException)
