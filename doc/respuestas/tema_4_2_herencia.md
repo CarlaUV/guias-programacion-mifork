@@ -2,14 +2,15 @@
 
 ## 1. En orientación a objetos, ¿qué es la **herencia** y su relación con "A es-un B"?. Explica las dos implicaciones principales: (1) **compatibilidad de tipos** y (2) **herencia de estado y comportamiento**. Pon un ejemplo en Java muy sencillo, donde un `Soldado` tiene un `nombre` (privado) y un método `saludar()` que muestra su nombre. Hay dos subtipos: un `Artillero`, que es capaz de disparar cohetes y un `Zapador` que pone minas, ambos heredan el atributo nombre y la capacidad de saludar. Además, y de forma específica, el artillero tiene un número de cohetes y el zapador un número de minas, accesibles mediante "getters" específicos. Respecto a la compatibilidad de tipos, aprovechémosla: crea un array de `Soldado`, mete varios de distinto tipo (son todos compatibles con `Soldado`). Recórrela y que todos te saluden.
 ### Respuesta
-# Tiene dos usos:
-# - Compatibilidad de tipos. Ej.: Vehiculo v = new Turismo();
-# - Herencia de estado (atributos) y comportamiento (métodos)
-# En orientación a objetos, la **herencia** es un mecanismo mediante el cual una clase (subclase) reutiliza y extiende el estado y el comportamiento definidos por otra clase (superclase). Conceptualmente, la herencia modela una relación **“A es-un B”**, lo que significa que un objeto de la subclase puede ser tratado como un objeto de la superclase. Por ejemplo, si `Artillero` hereda de `Soldado`, se puede afirmar que *un artillero es un soldado*.
+Tiene dos usos:
+- Compatibilidad de tipos. Ej.: Vehiculo v = new Turismo();
+- Herencia de estado (atributos) y comportamiento (métodos)
+En orientación a objetos, la **herencia** es un mecanismo mediante el cual una clase (subclase) reutiliza y extiende el estado y el comportamiento definidos por otra clase (superclase). Conceptualmente, la herencia modela una relación **“A es-un B”**, lo que significa que un objeto de la subclase puede ser tratado como un objeto de la superclase. Por ejemplo, si `Artillero` hereda de `Soldado`, se puede afirmar que *un artillero es un soldado*.
 
-# La primera implicación importante es la **compatibilidad de tipos**. Esto permite que una referencia del tipo de la superclase (`Soldado`) apunte a objetos de cualquiera de sus subclases (`Artillero`, `Zapador`). Gracias a esto, se pueden escribir estructuras de código genéricas (arrays, métodos) que trabajen con el tipo base sin conocer los subtipos concretos, facilitando la reutilización y extensibilidad del programa.
+La primera implicación importante es la **compatibilidad de tipos**. Esto permite que una referencia del tipo de la superclase (`Soldado`) apunte a objetos de cualquiera de sus subclases (`Artillero`, `Zapador`). Gracias a esto, se pueden escribir estructuras de código genéricas (arrays, métodos) que trabajen con el tipo base sin conocer los subtipos concretos, facilitando la reutilización y extensibilidad del programa.
 
-# La segunda implicación es la **herencia de estado y comportamiento**. Las subclases heredan los atributos y métodos accesibles (no privados de forma directa) de la superclase. En este caso, tanto `Artillero` como `Zapador` heredan el nombre del soldado y la capacidad de saludar, añadiendo además su propio estado y comportamiento específico.
+La segunda implicación es la **herencia de estado y comportamiento**. Las subclases heredan los atributos y métodos accesibles (no privados de forma directa) de la superclase. En este caso, tanto `Artillero` como `Zapador` heredan el nombre del soldado y la capacidad de saludar, añadiendo además su propio estado y comportamiento específico.
+***
 
 # Compatibilididad de tipos
 # Soldado s = new Artillero("pepe");
