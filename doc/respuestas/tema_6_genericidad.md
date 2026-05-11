@@ -424,7 +424,10 @@ A partir de estos ejemplos, se pueden definir los conceptos de **variancia**: un
 
 ## 13. Java permite recuperar covarianza y contravarianza en tipos genéricos de forma controlada mediante **wildcards**. ¿Qué es un wildcard (`?`)? Muestra la diferencia entre `List<? extends T>` y `List<? super T>`, indicando en qué casos se usa cada uno. Pon dos ejemplos: (i) un método que reciba una lista de números y calcule su suma, usando `? extends`; (ii) un método que reciba una lista y le añada varios números enteros, usando `? super`.
 ### Respuesta
-n **wildcard** (`?`) en Java representa un **tipo desconocido** dentro de un tipo genérico. Se utiliza cuando no interesa fijar exactamente el tipo parametrizado, sino **establecer una relación de compatibilidad**. Los wildcards permiten recuperar de forma controlada la covarianza y contravarianza que los genéricos normales no admiten, evitando los problemas de seguridad de tipos que aparecen con los arrays. En lugar de decir “esta lista es exactamente de `T`”, se puede expresar “esta lista contiene *algún* tipo relacionado con `T`”.
+
+###
+
+Un **wildcard** (`?`) en Java representa un **tipo desconocido** dentro de un tipo genérico. Se utiliza cuando no interesa fijar exactamente el tipo parametrizado, sino **establecer una relación de compatibilidad**. Los wildcards permiten recuperar de forma controlada la covarianza y contravarianza que los genéricos normales no admiten, evitando los problemas de seguridad de tipos que aparecen con los arrays. En lugar de decir “esta lista es exactamente de `T`”, se puede expresar “esta lista contiene *algún* tipo relacionado con `T`”.
 
 La expresión **`List<? extends T>`** indica una lista que contiene elementos de **algún subtipo de `T`**, aunque no se conoce cuál exactamente. Esta forma es **covariante** y resulta útil cuando la lista se va a **leer**, pero no a modificar. El compilador permite tratar los elementos como `T`, pero **impide añadir nuevos elementos**, ya que el tipo concreto almacenado es desconocido. Esta regla se resume habitualmente como *“Producer Extends”*: cuando una estructura produce datos, se usa `extends`.
 
@@ -456,7 +459,7 @@ NO: No se pueden añadir elementos a la lista dentro del método.
 
 ***
 
-## ✅ **Ejemplo (ii): añadir enteros usando `? super`**
+## **Ejemplo (ii): añadir enteros usando `? super`**
 
 ```java
 import java.util.List;
