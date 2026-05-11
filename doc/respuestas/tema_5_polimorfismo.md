@@ -2,11 +2,15 @@
 
 ## 1. Brevemente, ¿qué es el **"polimorfismo"** y para qué sirve en programación orientada a objetos? ¿qué es la **"sobreescritura"** de métodos?
 ### Respuesta
-El objetivo del polimorfismo es facilitar la extensión de los programas, facilita que esta extensión se haga creando código nuevo frente a editar código existente.
+# El objetivo del polimorfismo es facilitar la extensión de los programas, facilita que esta extensión se haga creando código nuevo frente a editar código existente.
 
 ## 2. ¿En qué consiste la **"ligadura dinámica"** o **"enlace tardío"**? ¿qué relación tiene con el polimorfismo? ¿hay que indicarlos explícitamente al programar o depende esto del lenguaje? Compara C++ y Java. Indicalo después también para Python.
 ### Respuesta
+# La ligadura dinámica o enlace tardío es el proceso en el que la llamada a un método se resuelve en tiempo de ejecución en lugar de en tiempo de compilación. Se relaciona con el polimorfismo, ya que permite que el método ejecutado dependa del tipo real del objeto y no del tipo de referencia.
 
+# En C++, la ligadura dinámica ocurre solo si los métodos son declarados como virtual, mientras que en Java es automática para todos los métodos de instancia (excepto los static y final). En Python, todos los métodos usan ligadura dinámica de forma predeterminada, ya que no hay necesidad de palabras clave como virtual o override.
+
+# En el caso de Python, al ser un lenguaje interpretado y de tipado dinámico, no existe el concepto de ligadura estática. Todo el enlace de funciones es tardío y depende exclusivamente del objeto evaluado en tiempo de ejecución, lo que proporciona un polimorfismo natural e inherente (conocido como duck typing) sin necesidad de herencias estrictas ni palabras clave.
 
 ## 3. Pon un ejemplo sencillo en Java, de un `Soldado`, con un método `saluda`, con dos subclases: `Zapador` y `Artillero`, donde `Zapador` sobreescribe el método `saludar`, sustituyendo por completo su comportamiento. Ilustra el funcionamiento del polimorfismo creando un array de `Soldados` de dos tipos y luego recorriéndolo empleando referencias de tipo `Soldado` y llamando a `saludar`.
 ### Respuesta
@@ -254,3 +258,33 @@ public class Linea {
 ```
 ## 11. ¿Qué es la **"herencia de interfaces"** en Java? ¿Existe **"herencia múltiple de interfaces"**? Pon un ejemplo de una interfaz `Fichero` que tenga un método para leer su contenido en forma de `String` y luego dicha interfaz sea extendida por otra que sea `FicheroEscribible` que permita enviar contenido e incluso eliminar el fichero.
 ### Respuesta
+# La herencia de interfaces ocurre cuando una interfaz hereda de otra utilizando la palabra clave extends. A diferencia de las clases, en las interfaces sí existe la herencia múltiple, lo que significa que una interfaz puede extender varias interfaces de forma simultánea.
+
+# Esto permite crear jerarquías de comportamientos, donde una interfaz hija acumula los contratos de sus padres, añadiendo además sus propios métodos.
+
+# Ejemplo de código: Fíjate cómo FicheroEscribible hereda de Fichero y cómo una clase concreta está obligada a implementar toda la cadena de métodos.
+
+```Java
+// Interfaz base
+interface Fichero {
+    String leerContenido();
+}
+
+// Herencia de interfaz: expande los requisitos del contrato original
+interface FicheroEscribible extends Fichero {
+    void escribirContenido(String texto);
+    void eliminarFichero();
+}
+
+// La clase concreta asume forzosamente los 3 métodos en total
+class ArchivoTexto implements FicheroEscribible {
+    @Override
+    public String leerContenido() { return "Datos de texto..."; }
+
+    @Override
+    public void escribirContenido(String texto) { System.out.println("Guardando: " + texto); }
+
+    @Override
+    public void eliminarFichero() { System.out.println("Archivo borrado de forma segura."); }
+}
+```
